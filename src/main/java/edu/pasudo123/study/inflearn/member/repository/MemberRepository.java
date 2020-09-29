@@ -1,5 +1,6 @@
-package edu.pasudo123.study.inflearn.member;
+package edu.pasudo123.study.inflearn.member.repository;
 
+import edu.pasudo123.study.inflearn.member.model.Member;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
