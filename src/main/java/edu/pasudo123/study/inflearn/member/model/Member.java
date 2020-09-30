@@ -1,8 +1,10 @@
 package edu.pasudo123.study.inflearn.member.model;
 
 import edu.pasudo123.study.inflearn.orders.model.Order;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "member")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
     @Id
@@ -26,7 +29,8 @@ public class Member {
     private List<Order> orders;
 
     @Builder
-    public Member(final String name) {
+    public Member(final String name, final Address address) {
         this.name = name;
+        this.address = address;
     }
 }

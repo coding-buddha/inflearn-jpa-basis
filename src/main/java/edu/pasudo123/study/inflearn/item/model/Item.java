@@ -3,6 +3,7 @@ package edu.pasudo123.study.inflearn.item.model;
 import edu.pasudo123.study.inflearn.category.model.Category;
 import edu.pasudo123.study.inflearn.exception.NotEnoughStockException;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "dtype")
 @Getter
+@Setter
 public abstract class Item {
 
     @Id

@@ -187,5 +187,22 @@ public class MemberRepository {
 * @PersistenceContext, 스프링이 생성한 엔티티 매니저를 주입
 * @PersistenceUnit, `private EntityManagerFactory entityManagerFactory;` 직접 팩토리를 만들어 엔티티를 생성할 수 있다.
 
+## Cascade 범위를 어느정도 까지 하는게 좋은가?
+* 테이블의 연관관계가 동일한 라이프사이클 범위 내에 존재한다면 `거기까지만` 하는게 좋다.
+
+<BR>
+
+## JPA 활용 시, Domain 내 필드값이 변경되면 더티체킹을 통해서 변경내역을 감지하여 update query 가 날라감
+
+<BR>
+
+## API 만들 시, 엔티티를 함부로 반환하지 말아라
+* API 는 해당 서비스의 스펙이다.
+* 엔티티의 로직이 변경되면 API 스펙이 변경되버리는 문제가 생긴다.
+
+## 엔티티를 변경할 시에는 항상 변경감지(더티체킹) 을 사용하도록 하자
+* 엔티티의 `ID` 값을 가지고 엔티티를 조회하고, 이후에 더티체킹을 수행할 수 있도록 하자
+* 어설픈 `merge()` 사용은 지양한다.
+
 ## 참고자료
 * [thymeleaf](https://www.thymeleaf.org/)

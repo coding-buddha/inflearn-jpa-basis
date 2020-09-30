@@ -3,6 +3,7 @@ package edu.pasudo123.study.inflearn.delivery.model;
 import edu.pasudo123.study.inflearn.member.model.Address;
 import edu.pasudo123.study.inflearn.orders.model.Order;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -20,6 +21,7 @@ public class Delivery {
     private Order order;
 
     @Embedded
+    @Setter
     private Address address;
 
     @Enumerated(EnumType.STRING)
@@ -27,5 +29,9 @@ public class Delivery {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public boolean isComp() {
+        return status == DeliveryStatus.COMP;
     }
 }
