@@ -1,4 +1,4 @@
-package edu.pasudo123.study.inflearn.item.rmodel;
+package edu.pasudo123.study.inflearn.item.model;
 
 import lombok.Getter;
 

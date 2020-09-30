@@ -84,7 +84,71 @@ insert into member (username, id) values ('PARK SUNG DONG', 1);
 ## 도메인 모델 및 테이블 설계
 <img src="./images/2020-09-29_jpashop01.PNG"  alt="image"/>
 
+<BR>
 
+## H2 를 설치하고 실행시킨 상태에서 스프링부트를 실행
+
+<BR>
+
+## 값 타입은 불변하게 만든다.
+```java
+/**
+ * 내장타입 설정
+ * 불변하게 만든다.
+ */
+@Embeddable
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Address {
+
+    private String city;
+    private String street;
+    private String zipcode;
+
+    public Address(final String city, final String street, final String zipcode) {
+        this.city = city;
+        this.street = street;
+        this.zipcode = zipcode;
+    }
+}
+```
+
+<BR>
+
+## JPA 엔티티 내의 컬렉션은 필드에서 추가하기
+```java
+@OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+private List<OrderItem> orderItems = new ArrayList<>();
+```
+
+<BR>
+
+## 테이블, 컬러명 생성 전략
+* SpringPhysicalNamingStrategy
+    * 카멜 케이스 --> 언더스코어(memberPoint member_point)
+    * .(점) --> _(언더스코어)
+    * 대문자 --> 소문자
+    
+## 연관관계 편의 메소드
+* 양방향 연관관계 시, 특정 엔티티를 세팅하는 경우 양 쪽 엔티티에 값을 삽입한다.
+* 연관관계 편의 메소드의 위치는 비즈니스 로직에 따라서 주체가 되는 엔티티가 가지도록 한다.
+```java
+// 연관관계 편의메소드
+public void setMember(Member member) {
+    this.member = member;
+    member.getOrders().add(this);
+}
+
+public void addOrderItem(OrderItem orderItem) {
+    this.orderItems.add(orderItem);
+    orderItem.setOrder(this);
+}
+
+public void setDelivery(Delivery delivery) {
+    this.delivery = delivery;
+    delivery.setOrder(this);
+}
+``` 
 
 ## 참고자료
 * [thymeleaf](https://www.thymeleaf.org/)

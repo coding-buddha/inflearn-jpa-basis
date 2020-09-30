@@ -1,6 +1,6 @@
 package edu.pasudo123.study.inflearn.orders.model;
 
-import edu.pasudo123.study.inflearn.item.rmodel.Item;
+import edu.pasudo123.study.inflearn.item.model.Item;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -15,15 +15,19 @@ public class OrderItem {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
 
     private int orderPrice; // 주문가격
 
     private int count;      // 주문수량
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 }
