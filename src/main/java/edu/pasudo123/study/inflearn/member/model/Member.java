@@ -1,6 +1,7 @@
 package edu.pasudo123.study.inflearn.member.model;
 
 import edu.pasudo123.study.inflearn.orders.model.Order;
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -23,4 +24,9 @@ public class Member {
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Order> orders;
+
+    @Builder
+    public Member(final String name) {
+        this.name = name;
+    }
 }
