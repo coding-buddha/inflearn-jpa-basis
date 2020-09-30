@@ -1,6 +1,7 @@
 package edu.pasudo123.study.inflearn.item.model;
 
 import edu.pasudo123.study.inflearn.category.model.Category;
+import edu.pasudo123.study.inflearn.exception.NotEnoughStockException;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -25,4 +26,18 @@ public abstract class Item {
 
     @ManyToMany(mappedBy = "items", fetch = FetchType.LAZY)
     private List<Category> categories = new ArrayList<>();
+
+    // DDD 설계
+    // 재고 수량 증가
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    public void removeStock(int quantity) {
+        if(stockQuantity - quantity < 0) {
+            throw new NotEnoughStockException("재고 수량은 음수가 되지 못합니다.");
+        }
+
+        this.stockQuantity -= quantity;
+    }
 }
